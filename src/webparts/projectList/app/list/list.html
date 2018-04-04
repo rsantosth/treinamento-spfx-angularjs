@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-9">
+        <h1 style="margin-bottom: 15px;">Projetos</h1>
+    </div>
+    <div class="col-md-3 text-right">
+        <a href="#">
+            <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+            Novo Projeto
+        </a>
+    </div>
+</div>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default" ng-repeat="projeto in vm.projetoListItems">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" ng-href="{{ '#collapse' + projeto.id }}">
+                {{projeto.titulo}}
+            </a>
+            </h4>
+        </div>
+        <div ng-attr-id="{{ 'collapse' + projeto.id }}" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+                <p style="margin-bottom: 30px;">{{projeto.descricao}}</p>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <p>Gestor do Projeto</p>
+                        <uif-persona uif-style="round" uif-size="small" uif-image-url="{{projeto.gestor.imagemUrl}}">
+                            <uif-persona-initials uif-color="blue">{{vm.getNameInitials(projeto.gestor.nome)}}</uif-persona-initials>
+                            <uif-persona-primary-text>{{projeto.gestor.nome}}</uif-persona-primary-text>
+                            <uif-persona-secondary-text>{{projeto.gestor.email}}</uif-persona-secondary-text>
+                        </uif-persona>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <button type="button" class="btn btn-primary">Visualizar Atividades</button>
+                        <button type="button" class="btn btn-primary">Adicionar Tarefa</button>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
