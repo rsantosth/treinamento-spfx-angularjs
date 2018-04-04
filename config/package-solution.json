@@ -1,0 +1,12 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "angular-project-list-client-side-solution",
+    "id": "8fefed67-24da-4daf-92a3-24fa8937da02",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/angular-project-list.sppkg"
+  }
+}
