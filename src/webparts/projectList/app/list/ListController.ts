@@ -4,16 +4,15 @@ import { Projeto } from '../../models/Projeto';
 import { ProjetoService } from '../../services/ProjetoService';
 
 export class ListController {
-    public static $inject: string[] = ['$rootScope', '$scope', 'Styles'];
+    public static $inject: string[] = ['$scope', '$state', 'Styles'];
 
     private projetoListItems: Projeto[];
   
     constructor(
-        private $rootScope: any,
         private $scope: angular.IScope,
+        private $state: angular.ui.IStateService,
         private Styles: any
     ) {
-        debugger;
         this.loadProjectList();
     }
 
@@ -23,6 +22,10 @@ export class ListController {
             this.projetoListItems = response;
             this.$scope.$apply();
         });
+    }
+
+    private addNewProject(): void {
+        this.$state.go('edit', {});
     }
 
     private getNameInitials(name: string): string {

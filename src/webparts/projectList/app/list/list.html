@@ -3,14 +3,18 @@
         <h1 style="margin-bottom: 15px;">Projetos</h1>
     </div>
     <div class="col-md-3 text-right">
-        <a href="#">
+        <a href="#" ng-click="vm.addNewProject();">
             <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
             Novo Projeto
         </a>
     </div>
 </div>
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="alert alert-warning" role="alert" ng-if="vm.projetoListItems.length === 0">
+    Não há projetos cadastrados.
+</div>
+
+<div class="panel-group" id="accordion" role="tablist" ng-if="vm.projetoListItems.length > 0">
     <div class="panel panel-default" ng-repeat="projeto in vm.projetoListItems">
         <div class="panel-heading" role="tab">
             <h4 class="panel-title">
@@ -32,7 +36,7 @@
                         </uif-persona>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <button type="button" class="btn btn-primary">Visualizar Atividades</button>
+                        <button type="button" class="btn btn-primary">Visualizar Tarefas</button>
                         <button type="button" class="btn btn-primary">Adicionar Tarefa</button>
                     </div>                    
                 </div>

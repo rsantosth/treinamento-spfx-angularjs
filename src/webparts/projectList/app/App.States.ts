@@ -13,5 +13,11 @@ function uiRouterConfigurator($stateProvider: ng.ui.IStateProvider, $urlRouterPr
       params: {},
       controller: 'listController',
       controllerAs: 'vm'
-    });
+    })
+    .state('edit', {
+      template: require('./edit/edit.html'),
+      params: {},
+      controller: 'editController',
+      controllerAs: 'vm'
+    });    
 }

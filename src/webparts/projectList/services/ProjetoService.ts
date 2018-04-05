@@ -28,4 +28,17 @@ export class ProjetoService {
             });
         });      
     }
+
+    public addProjeto(projeto: Projeto): Promise<void> {
+        return new Promise<void>((resolve) => {
+            pnp.sp.web.lists.getByTitle("Projetos").items.add({
+                Title: projeto.titulo,
+                Descricao: projeto.descricao,
+                GestorId: projeto.gestor.id
+            }).then(i => {
+                console.log(i);
+                resolve();
+            });
+        });
+    }
 }
