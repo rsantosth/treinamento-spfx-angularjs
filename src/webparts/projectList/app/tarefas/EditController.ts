@@ -1,8 +1,9 @@
 import * as angular from 'angular';
 
 import { Projeto } from '../../models/Projeto';
+import { Tarefa } from '../../models/Tarefa';
 import { Usuario } from '../../models/Usuario';
-import { ProjetoService } from '../../services/ProjetoService';
+import { TarefaService } from '../../services/TarefaService';
 import { UsuarioService } from '../../services/UsuarioService';
 
 const peopleUsers: any[] = [];
@@ -21,43 +22,45 @@ usuarioService.listAllUsuarios().then((response) => {
     });
 });
 
-export class ProjetoEditController {
-    public static $inject: string[] = ['$scope', '$state', 'Styles'];
+export class TarefaEditController {
+    public static $inject: string[] = ['$scope', '$state', '$stateParams', 'Styles'];
 
-    private projetoListItems: Projeto[];
-    private nome: string;
-    private descricao: string;
-    private gestor: number;
-
+    private projeto: Projeto;
     private selectedPeopleUsers: any[];
-  
+    
+    private descricao: string;
+    private prazo: any;
+    private andamento: number;
+    private observacoes: string;
+
     constructor(
         private $scope: angular.IScope,
         private $state: angular.ui.IStateService,
+        private $stateParams: angular.ui.IStateParamsService,
         private Styles: any
-    ) {}
+    ) {
+        this.projeto = JSON.parse(this.$stateParams['projetoData']);
+    }
 
-    private addNewProjeto(): void {
+    private addNewTarefa(): void {
         if (!this.selectedPeopleUsers || this.selectedPeopleUsers.length !== 1) {
-            alert('Favor selecionar somente um usuário para gestor do projeto.');
+            alert('Favor selecionar somente um usuário para responsável da tarefa.');
             return;
         }
 
-        const projeto = new Projeto();
-        const projetoService = new ProjetoService();
+        const tarefa = new Tarefa();
+        const tarefaService = new TarefaService();
 
-        projeto.titulo = this.nome;
-        projeto.descricao = this.descricao;
-        projeto.gestor = new Usuario();
-        projeto.gestor.id = this.selectedPeopleUsers[0].id;
+        tarefa.descricao = this.descricao;
+        tarefa.prazo = this.prazo;
+        tarefa.andamento = this.andamento;
+        tarefa.observacoes = this.observacoes;
+        tarefa.responsavel = new Usuario();
+        tarefa.responsavel.id = this.selectedPeopleUsers[0].id;
 
-        projetoService.addProjeto(projeto).then(() => {
-            this.$state.go('projetoList', {});
+        tarefaService.addTarefa(tarefa, this.projeto.id).then(() => {
+            this.$state.go('tarefaList', {'projetoData': JSON.stringify(this.projeto)});
         });
-    }
-
-    private cancel(): void {
-        this.$state.go('projetoList', {});
     }
 
     private getPeoplePickerUsers(searchQuery: string): any[] {
@@ -69,5 +72,9 @@ export class ProjetoEditController {
         }
 
         return peopleUsers;
+    }    
+
+    private voltar(): void {
+        this.$state.go('projetoList');
     }
 }

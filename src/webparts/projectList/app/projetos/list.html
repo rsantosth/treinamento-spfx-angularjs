@@ -3,7 +3,7 @@
         <h1 style="margin-bottom: 15px;">Projetos</h1>
     </div>
     <div class="col-md-3 text-right">
-        <a href="#" ng-click="vm.addNewProject();">
+        <a href="#" ng-click="vm.addNewProjeto();">
             <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
             Novo Projeto
         </a>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <button type="button" ng-click="vm.viewTarefaList(projeto);" class="btn btn-primary">Visualizar Tarefas</button>
-                        <button type="button" class="btn btn-primary">Adicionar Tarefa</button>
+                        <button type="button" ng-click="vm.addNewTarefa(projeto);" class="btn btn-primary">Adicionar Tarefa</button>
                     </div>                    
                 </div>
             </div>

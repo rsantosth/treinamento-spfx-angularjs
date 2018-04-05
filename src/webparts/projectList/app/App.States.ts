@@ -27,5 +27,13 @@ function uiRouterConfigurator($stateProvider: ng.ui.IStateProvider, $urlRouterPr
       },
       controller: 'tarefaListController',
       controllerAs: 'vm'
+    })
+    .state('tarefaEdit', {
+      template: require('./tarefas/edit.html'),
+      params: {
+        projetoData: undefined
+      },
+      controller: 'tarefaEditController',
+      controllerAs: 'vm'
     });
 }

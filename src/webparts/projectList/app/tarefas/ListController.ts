@@ -10,7 +10,6 @@ export class TarefaListController {
     private queryExecutada: boolean = false;
     private exibirFinalizadas: boolean = false;
     private tarefasListItems: Tarefa[] = [];
-    private finalizadasListItems: Tarefa[] = [];
 
     constructor(
         private $scope: angular.IScope,
@@ -30,11 +29,6 @@ export class TarefaListController {
                 (tarefa as any).showObservacoes = false;
                 return tarefa;
             });
-            this.$scope.$apply();
-        });
-
-        service.listTarefasByProjeto(this.projeto.id, true).then((response) => {
-            this.finalizadasListItems = response;
             this.$scope.$apply();
         });
     }

@@ -9,21 +9,24 @@ export class ProjetoListController {
     public static $inject: string[] = ['$scope', '$state', 'Styles'];
 
     private projetoListItems: Projeto[];
+    private loading: boolean = false;
   
     constructor(
         private $scope: angular.IScope,
         private $state: angular.ui.IStateService,
         private Styles: any
     ) {
-        this.loadProjectList();
+        this.loading = true;
+        this.loadProjetoList();
     }
 
-    private loadProjectList(): void {
+    private loadProjetoList(): void {
         if (Environment.type === EnvironmentType.Local) {
             const service = new MockService();
             service.getProjetosMock().then((response) => {
                 this.projetoListItems = response;
                 this.$scope.$apply();
+                this.loading = false;
             });
         } else {
             const service = new ProjetoService();
@@ -34,8 +37,12 @@ export class ProjetoListController {
         }
     }
 
-    private addNewProject(): void {
+    private addNewProjeto(): void {
         this.$state.go('projetoEdit', {});
+    }
+
+    private addNewTarefa(projeto: Projeto): void {
+        this.$state.go('tarefaEdit', {'projetoData': JSON.stringify(projeto)});
     }
 
     private viewTarefaList(projeto: Projeto): void {

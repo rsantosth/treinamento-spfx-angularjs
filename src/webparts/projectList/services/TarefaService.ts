@@ -1,5 +1,6 @@
 import { Tarefa } from '../models/Tarefa';
 import pnp from 'sp-pnp-js';
+import * as moment from 'moment';
 
 import async = require("async");
 
@@ -30,6 +31,22 @@ export class TarefaService {
             });
         });      
     }
+
+    public addTarefa(tarefa: Tarefa, projetoId: number): Promise<void> {
+        return new Promise<void>((resolve) => {
+            pnp.sp.web.lists.getByTitle("Tarefas").items.add({
+                Title: tarefa.descricao,
+                Prazo: moment(tarefa.prazo).format('YYYY-MM-DD'),
+                ResponsavelId: tarefa.responsavel.id,
+                Andamento: tarefa.andamento / 100,
+                Observacoes: tarefa.observacoes,
+                ProjetoId: projetoId
+            }).then(i => {
+                console.log(i);
+                resolve();
+            });
+        });
+    }    
 
     public finalizarTarefa(tarefaId: number): Promise<void> {
         return new Promise<void>((resolve) => {
