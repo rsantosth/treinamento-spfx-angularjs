@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-9">
+        <h2 style="margin-bottom: 15px;">Projeto: {{vm.projeto.titulo}}</h2>
+    </div>
+    <div class="col-md-3 text-right">
+        <a href="#" ng-click="vm.voltar();">
+            <i class="ms-Icon ms-Icon--Back" aria-hidden="true"></i>
+            Voltar
+        </a>
+    </div>
+</div>
+
+<div class="alert alert-warning" role="alert" ng-if="vm.queryExecutada && vm.tarefasListItems.length === 0">
+    Não foram encontradas tarefas para este projeto.
+</div>
+
+<uif-toggle ng-if="vm.tarefasListItems.length > 0" uif-label-off="Exibir finalizadas" uif-label-on="Ocultar finalizadas" ng-model="vm.exibirFinalizadas"></uif-toggle>
+
+<div ng-if="vm.tarefasListItems.length > 0">
+    <table class="table">
+        <thead>
+            <th>Descrição</th>
+            <th>Prazo</th>
+            <th>Andamento</th>
+            <th>Responsável</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody ng-repeat="tarefa in vm.tarefasListItems">
+            <tr ng-show="vm.exibirFinalizadas || !(tarefa.finalizada)" ng-class="{'success': tarefa.finalizada}">
+                <td>{{tarefa.descricao}}</td>
+                <td>{{tarefa.prazo}}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" ng-style="{'width': '{{tarefa.andamento}}%'}">
+                            {{tarefa.andamento}}%
+                        </div>
+                    </div>
+                </td>                
+                <td>{{tarefa.responsavel.nome}}</td>
+                <td>
+                    <button type="button" ng-if="!(tarefa.finalizada)" ng-click="vm.finalizarTarefa(tarefa.id);" class="btn btn-primary">Finalizar</button>
+                </td>
+                <td>
+                    <a href="#" ng-if="tarefa.observacoes && !(tarefa.finalizada)" ng-hide="tarefa.showObservacoes" ng-click="vm.exibirObservacoes(tarefa);"><i class="ms-Icon ms-Icon--ChevronDownSmall"></i></a>
+                    <a href="#" ng-show="tarefa.showObservacoes" ng-click="vm.exibirObservacoes(tarefa);"><i class="ms-Icon ms-Icon--ChevronUpSmall"></i></a>
+                </td>
+            </tr>
+            <tr class="warning" ng-show="tarefa.showObservacoes">
+                <td colspan="6"><strong>Observação: </strong>{{tarefa.observacoes}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

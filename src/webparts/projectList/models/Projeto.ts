@@ -4,7 +4,7 @@ export class Projeto {
     public id: number;
     public titulo: string;
     public descricao: string;
-    public gestor: any;
+    public gestor: Usuario;
 
     public static mapListItem(projetoItem: any, gestorItem: any): Projeto {
         return {

@@ -8,16 +8,24 @@ uiRouterConfigurator.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function uiRouterConfigurator($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider): void {
   $stateProvider
-    .state('list', {
-      template: require('./list/list.html'),
+    .state('projetoList', {
+      template: require('./projetos/list.html'),
       params: {},
-      controller: 'listController',
+      controller: 'projetoListController',
       controllerAs: 'vm'
     })
-    .state('edit', {
-      template: require('./edit/edit.html'),
+    .state('projetoEdit', {
+      template: require('./projetos/edit.html'),
       params: {},
-      controller: 'editController',
+      controller: 'projetoEditController',
       controllerAs: 'vm'
-    });    
+    })
+    .state('tarefaList', {
+      template: require('./tarefas/list.html'),
+      params: {
+        projetoData: undefined
+      },
+      controller: 'tarefaListController',
+      controllerAs: 'vm'
+    });
 }

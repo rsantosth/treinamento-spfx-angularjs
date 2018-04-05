@@ -4,8 +4,9 @@ import 'angular-ui-router';
 import styles from '../ProjectListWebPart.module.scss';
 
 import { AppController } from './AppController';
-import { ListController } from './list/ListController';
-import { EditController } from './edit/EditController';
+import { ProjetoListController } from './projetos/ListController';
+import { ProjetoEditController } from './projetos/EditController';
+import { TarefaListController } from './tarefas/ListController';
 
 angular
   .module('projectList', [
@@ -15,7 +16,8 @@ angular
   ])
   .constant('Styles', styles)
   .controller('appController', AppController)
-  .controller('listController', ListController)
-  .controller('editController', EditController);
+  .controller('projetoListController', ProjetoListController)
+  .controller('projetoEditController', ProjetoEditController)
+  .controller('tarefaListController', TarefaListController);
 
 require('./App.States');

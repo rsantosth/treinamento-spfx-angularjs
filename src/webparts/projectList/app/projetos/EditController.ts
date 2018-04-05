@@ -21,7 +21,7 @@ usuarioService.listAllUsuarios().then((response) => {
     });
 });
 
-export class EditController {
+export class ProjetoEditController {
     public static $inject: string[] = ['$scope', '$state', 'Styles'];
 
     private projetoListItems: Projeto[];
@@ -52,12 +52,12 @@ export class EditController {
         projeto.gestor.id = this.selectedPeopleUsers[0].id;
 
         projetoService.addProjeto(projeto).then(() => {
-            this.$state.go('list', {});
+            this.$state.go('projetoList', {});
         });
     }
 
     private cancel(): void {
-        this.$state.go('list', {});
+        this.$state.go('projetoList', {});
     }
 
     private getPeoplePickerUsers(searchQuery: string): any[] {
